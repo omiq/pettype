@@ -1,0 +1,17 @@
+# cc65 build artifacts
+*.o
+*.map
+*.lst
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*~
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Keep the game binary for releases
+!game.prg 
