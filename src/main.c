@@ -50,6 +50,7 @@ static unsigned char i = 0;
 static unsigned char j = 0;
 static unsigned char alive = 1;
 static unsigned char won_game = 0;
+static unsigned char lives = 3;
 static unsigned char x = 0;
 static unsigned char y = 0;
 static unsigned char old_x = 0;
@@ -285,6 +286,7 @@ static const unsigned char map[9600] = {
     };
 
 void init_screen(void) {
+
     // Clear screen buffer first
     memset(screen_buffer, PETSCII_SPACE, SCREEN_COLS * SCREEN_ROWS);
     
@@ -353,8 +355,16 @@ void draw_ship(void) {
 
         // Check center position first
         if(ship_pos[42] != PETSCII_SPACE || ship_pos[2] != PETSCII_SPACE) {
-            alive = 0;
-            won_game = 0;
+            
+
+            lives--;
+            if(lives <= 0) 
+            {
+                alive = 0;
+                won_game = 0;
+                return;
+
+            }
             return;
         }
         // Then check remaining positions...
@@ -498,6 +508,7 @@ void init_game(void) {
     y = 10;
     alive = 1;
     won_game = 0;
+    lives = 3;
     ticks = 0;
     
     // Clear keyboard state
