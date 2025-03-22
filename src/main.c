@@ -64,12 +64,12 @@ struct Enemy {
 
 #define MAX_ENEMIES 6
 struct Enemy enemies[MAX_ENEMIES] = {
-    {60, 5, 1, 'O'},
-    {100, 10, 1, 'O'},  
-    {150, 10, 1, 'O'},  
-    {200, 15, 1, 'O'},
-    {300, 5, 1, 'O'},
-    {310, 8, 1, 'O'},  
+    {60, 5, 1, 90},
+    {100, 10, 1, 90},  
+    {150, 10, 1, 90},  
+    {200, 15, 1, 90},
+    {300, 5, 1, 90},
+    {310, 8, 1, 90},  
     // ... more enemies ...
 };
 
@@ -310,8 +310,8 @@ void draw_ship(void) {
     
     // Draw ship
     memcpy(ship_pos, ship, 5);
-    memcpy(ship_pos + SCREEN_COLS, ship + 5, 5);
-    memcpy(ship_pos + (SCREEN_COLS * 2), ship + 10, 5);
+    memcpy(ship_pos + 40, ship + 5, 5);
+    memcpy(ship_pos + 80, ship + 10, 5);
 }
 
 void handle_input(void) {
