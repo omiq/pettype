@@ -1,19 +1,31 @@
-# PET Horizontal Shooter
+# PET-Type
 
-A horizontal scrolling shooter game for the Commodore PET 4032, inspired by classic arcade games.
-Written in C using the cc65 compiler suite.
+A Commodore PET game implemented in C, matching the original 2021 assembly version.
+
+## Documentation
+
+- [Implementation Details](docs/implementation.md) - Detailed technical documentation of the current implementation
+- [Hardware Reference](docs/pet_hardware.md) - PET hardware specifics and memory layout
+- [Graphics API](docs/graphics_api.md) - Documentation of the graphics/screen handling system
+- [Development History](docs/part1.md) - Development process and history
+
+## Building
+
+```bash
+make clean && make
+```
+
+This will produce `game.prg` which can be run in a PET emulator.
+
+## Version History
+
+- v1.0-assembly-match: Complete working implementation matching original 2021 assembly version
 
 ## Requirements
 
 - Commodore PET 4032 (or emulator)
 - Minimum 32KB RAM
 - cc65 compiler suite
-
-## Building
-
-1. Install cc65 compiler suite
-2. Run `make` to build the game
-3. The output file `game.prg` can be loaded on a PET or emulator
 
 ## Controls
 
