@@ -160,22 +160,10 @@ void txt_DefineScreen(void) {
     }
 }
 
-void Key_Read(void) {
-    unsigned char row;
-    Key_keyState = 0;
-
-    for(row = 0; row < 10; row++) {
-        POKE(0xE810, row);              // Select keyboard row
-        Key_keys[row] = ~PEEK(0xE812);  // Read and invert key state
-        Key_keysPressed[row] = (Key_keys[row] ^ Key_keysLast[row]) & Key_keys[row];
-        Key_keysLast[row] = Key_keys[row];
-        Key_keyState += Key_keys[row];   // Update overall key state
-    }
-}
 
 void wait_vsync(void) {
     while(!(PEEK(TIMER_LOCATION) & 0x20));
-    while(PEEK(TIMER_LOCATION) & 0x20);
+    //while(PEEK(TIMER_LOCATION) & 0x20);
 }
 
 #define PETSCII_SPACE 32  // Space character in PETSCII
