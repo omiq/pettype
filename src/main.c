@@ -5,6 +5,9 @@
 #include <peekpoke.h>
 #include <conio.h>
 #define collision_off 0
+#define true 1
+#define false 0
+
 // Function declarations
 void init_game(void);
 void init_screen(void);
@@ -50,6 +53,13 @@ static unsigned char old_x = 0;
 static unsigned char old_y = 0;
 static unsigned int sx = 0;
 static unsigned int sy = 0;
+
+// Shooting
+#define MAX_BULLETS 4  // Maximum bullets on screen
+struct Bullet {
+    int x, y;
+    unsigned char active;
+} bullets[MAX_BULLETS];
 
 // Text output variables (from assembly)
 static unsigned char txt_text_x = 0;
@@ -237,6 +247,13 @@ void draw_screen(void) {
         // Move to next row in screen buffer
         screen_ptr += SCREEN_COLS;
     }
+
+    // After drawing the map but before the ship
+    for(i = 0; i < MAX_BULLETS; i++) {
+        if(bullets[i].active) {
+            screen_buffer[bullets[i].y * SCREEN_COLS + bullets[i].x] = '-';  // Or whatever bullet character
+        }
+    }
 }
 
 void draw_ship(void) {
@@ -273,8 +290,18 @@ void handle_input(void) {
 
             // enter is fire
             case 13:
-                // player has fired
+
+                // Find first inactive bullet
+                for( i = 0; i < MAX_BULLETS; i++) {
+                    if(!bullets[i].active) {
+                        bullets[i].x = x + 4;  // Start at ship's nose
+                        bullets[i].y = y + 1;  // Middle of ship
+                        bullets[i].active = true;
+                        break;
+                    }
+                }
                 break;
+
 
             case 'w':
             case 'W':
@@ -307,6 +334,18 @@ void handle_input(void) {
     }
 }
 
+void update_bullets(void) {
+    for( i = 0; i < MAX_BULLETS; i++) {
+        if(bullets[i].active) {
+            bullets[i].x += 2;  // Move right
+            // Deactivate if off screen
+            if(bullets[i].x >= SCREEN_COLS) {
+                bullets[i].active = false;
+            }
+        }
+    }
+}
+
 int main(void) {
     // Main game loop from assembly
     while(1) {
@@ -330,6 +369,7 @@ int main(void) {
                 if(sx >= 400) sx = 0;
                 
                 // Draw new frame
+                update_bullets();
                 draw_screen();
                 draw_ship();
                 
