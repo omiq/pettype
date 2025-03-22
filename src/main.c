@@ -127,10 +127,10 @@ void txt_wait_key(void) {
 // Title screen (from assembly)
 void start_screen(void) {
     txt_cls();
-    txt_text_x = 10;
+    txt_in_str = "pet-type 2025";
+    txt_text_x = ((40-strlen(txt_in_str))/2);
     txt_text_y = 10;
     txt_move_to();
-    txt_in_str = "pet-type 2025";
     txt_CRLF = 0;
     txt_print_string();
     txt_clear_buffer();
@@ -140,10 +140,10 @@ void start_screen(void) {
 // End screen (from assembly)
 void end_screen(void) {
     txt_cls();
-    txt_text_x = 10;
+    txt_in_str = won_game ? "well done!" : "you lose!";
+    txt_text_x = ((40-strlen(txt_in_str))/2);
     txt_text_y = 10;
     txt_move_to();
-    txt_in_str = won_game ? "well done!" : "you lose!";
     txt_CRLF = 0;
     txt_print_string();
     txt_clear_buffer();
@@ -270,6 +270,12 @@ void handle_input(void) {
         old_y = y;
         
         switch(key) {
+
+            // enter is fire
+            case 13:
+                // player has fired
+                break;
+
             case 'w':
             case 'W':
                 if(y >= 2) {
@@ -291,6 +297,11 @@ void handle_input(void) {
             case 'a':
             case 'A':
                 if(x > 0) x--;
+                break;
+            case 'Q':
+            case 'q':
+                alive = 0;
+                won_game = 0;
                 break;
         }
     }
