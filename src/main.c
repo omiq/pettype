@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdio.h>
+#include <stdio.h>
 #include <string.h>
 #include <peekpoke.h>
 #include <conio.h>
@@ -256,20 +258,16 @@ void draw_ship(void) {
     // where the game immediately ends when the ship is on the map
     if(collision_off) {
     } else {
-    // Check collision - check all three rows where ship will be
-    if(ship_pos[0] != PETSCII_SPACE || ship_pos[1] != PETSCII_SPACE || 
-       ship_pos[2] != PETSCII_SPACE || ship_pos[3] != PETSCII_SPACE ||
-       ship_pos[4] != PETSCII_SPACE ||
-       ship_pos[SCREEN_COLS] != PETSCII_SPACE || ship_pos[SCREEN_COLS+1] != PETSCII_SPACE ||
-       ship_pos[SCREEN_COLS+2] != PETSCII_SPACE || ship_pos[SCREEN_COLS+3] != PETSCII_SPACE ||
-       ship_pos[SCREEN_COLS+4] != PETSCII_SPACE ||
-       ship_pos[SCREEN_COLS*2] != PETSCII_SPACE || ship_pos[SCREEN_COLS*2+1] != PETSCII_SPACE ||
-       ship_pos[SCREEN_COLS*2+2] != PETSCII_SPACE || ship_pos[SCREEN_COLS*2+3] != PETSCII_SPACE ||
-       ship_pos[SCREEN_COLS*2+4] != PETSCII_SPACE) {
-        alive = 0;
-        won_game = 0;
-        return;
-    }}
+
+        // Check center position first
+        if(ship_pos[42] != PETSCII_SPACE || ship_pos[2] != PETSCII_SPACE) {
+            alive = 0;
+            won_game = 0;
+            return;
+        }
+        // Then check remaining positions...
+
+    }
     
     // Draw ship
     memcpy(ship_pos, ship, 5);

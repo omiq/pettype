@@ -11,4 +11,4 @@ $(TARGET): $(SOURCES)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 clean:
-	rm -f $(TARGET) *.o 
+	rm -f *.o 
