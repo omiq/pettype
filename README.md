@@ -33,12 +33,9 @@ This will produce `game.prg` which can be run in a PET emulator.
 - S: Move Down
 - A: Move Left
 - D: Move Right
-- SPACE: Fire
-- F: Charge Shot
+- Enter: Fire
 
 ## Technical Details
 
 - Uses PET's 40x25 text screen at $8000
 - PETSCII block graphics for sprites
-- Double buffering for smooth scrolling
-- Keyboard matrix scanning for input 
