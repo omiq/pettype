@@ -23,7 +23,7 @@ void handle_input(void);
 // Memory locations from assembly
 #define SCREEN_RAM 0x8000
 #define SCREEN_COLS 40
-#define SCREEN_ROWS 24
+#define SCREEN_ROWS 20
 #define TIMER_LOCATION 0xe840
 
 // Zero page addresses (from assembly)
@@ -89,6 +89,9 @@ void txt_cls(void) {
 
     // Clear screen using BASIC's CLS routine
     clrscr();
+
+// Pet graphic mode
+    printf("%c",142);
     
     // Initialize screen tables
     addr = SCREEN_RAM;
@@ -125,7 +128,7 @@ void start_screen(void) {
     txt_text_x = 10;
     txt_text_y = 10;
     txt_move_to();
-    txt_in_str = "PET-TYPE 2021";
+    txt_in_str = "pet-type 2025";
     txt_CRLF = 0;
     txt_print_string();
     txt_clear_buffer();
@@ -138,7 +141,7 @@ void end_screen(void) {
     txt_text_x = 10;
     txt_text_y = 10;
     txt_move_to();
-    txt_in_str = won_game ? "YOU WIN!" : "YOU LOSE!";
+    txt_in_str = won_game ? "well done!" : "you lose!";
     txt_CRLF = 0;
     txt_print_string();
     txt_clear_buffer();
