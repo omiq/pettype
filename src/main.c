@@ -313,7 +313,7 @@ int main(void) {
             
             // Update game state
             ticks++;
-            if((ticks % 5) == 0) {
+            if((ticks % 15) == 0) {
                 // Scroll map - increment by 1 but wrap at 400 since that's the map width
                 sx++;
                 if(sx >= 400) sx = 0;
