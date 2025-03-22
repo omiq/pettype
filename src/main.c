@@ -74,13 +74,13 @@ struct Enemy {
 
 #define MAX_ENEMIES 7
 struct Enemy enemies[MAX_ENEMIES] = {
-    {41, 5, 1, 90, MOVE_UPDOWN, 0},
-    {50, 0, 1, 90, MOVE_UPDOWN, 0},
-    {100, 10, 1, 90, MOVE_UPDOWN, 0},  
+    {41, 5, 1, 60, MOVE_UPDOWN, 0},
+    {50, 0, 1, 60, MOVE_UPDOWN, 0},
+    {100, 10, 1, 60, MOVE_UPDOWN, 0},  
     {150, 10, 1, 90, MOVE_ZIGZAG, 0},  
-    {200, 15, 1, 90, MOVE_CIRCLE, 0},
-    {300, 5, 1, 90, MOVE_CIRCLE, 0},
-    {310, 8, 1, 90, MOVE_CIRCLE, 0},  
+    {200, 15, 1, 87, MOVE_CIRCLE, 0},
+    {300, 5, 1, 87, MOVE_CIRCLE, 0},
+    {310, 8, 1, 87, MOVE_CIRCLE, 0},  
     // ... more enemies ...
 };
 
