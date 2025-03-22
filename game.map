@@ -1,0 +1,399 @@
+Modules list:
+-------------
+main.o:
+    CODE              Offs=000000  Size=0000B9  Align=00001  Fill=0000
+    BSS               Offs=000000  Size=000004  Align=00001  Fill=0000
+screen.o:
+    CODE              Offs=0000B9  Size=000215  Align=00001  Fill=0000
+    RODATA            Offs=000000  Size=000010  Align=00001  Fill=0000
+    BSS               Offs=000004  Size=0003E9  Align=00001  Fill=0000
+player.o:
+    CODE              Offs=0002CE  Size=0002F5  Align=00001  Fill=0000
+    RODATA            Offs=000010  Size=000004  Align=00001  Fill=0000
+    BSS               Offs=0003ED  Size=000019  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(_cursor.o):
+    BSS               Offs=000406  Size=000001  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(add.o):
+    CODE              Offs=0005C3  Size=00001C  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(addysp.o):
+    CODE              Offs=0005DF  Size=00000E  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(aslax2.o):
+    CODE              Offs=0005ED  Size=00000B  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(callmain.o):
+    CODE              Offs=0005F8  Size=000017  Align=00001  Fill=0000
+    DATA              Offs=000000  Size=000004  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(cgetc.o):
+    CODE              Offs=00060F  Size=000054  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(checkst.o):
+    CODE              Offs=000663  Size=00000A  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(clrscr.o):
+    CODE              Offs=00066D  Size=00002A  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(condes.o):
+    CODE              Offs=000697  Size=00000C  Align=00001  Fill=0000
+    DATA              Offs=000004  Size=000025  Align=00001  Fill=0000
+    ONCE              Offs=000000  Size=00000C  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(conio.o):
+/usr/share/cc65/lib/pet.lib(cputc.o):
+    CODE              Offs=0006A3  Size=00006F  Align=00001  Fill=0000
+    RODATA            Offs=000014  Size=000032  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(crt0.o):
+    BSS               Offs=000407  Size=000002  Align=00001  Fill=0000
+    STARTUP           Offs=000000  Size=000040  Align=00001  Fill=0000
+    INIT              Offs=000000  Size=00001A  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(decsp1.o):
+    CODE              Offs=000712  Size=000009  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(decsp2.o):
+    CODE              Offs=00071B  Size=00000D  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(decsp3.o):
+    CODE              Offs=000728  Size=00000D  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(decsp4.o):
+    CODE              Offs=000735  Size=00000D  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(exehdr.o):
+    EXEHDR            Offs=000000  Size=00000C  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(gotoxy.o):
+    CODE              Offs=000742  Size=00000D  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(incax1.o):
+    CODE              Offs=00074F  Size=000007  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(incsp1.o):
+    CODE              Offs=000756  Size=000007  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(incsp2.o):
+    CODE              Offs=00075D  Size=000016  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(incsp3.o):
+    CODE              Offs=000773  Size=000005  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(incsp6.o):
+    CODE              Offs=000778  Size=000005  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(kbhit.o):
+    CODE              Offs=00077D  Size=000009  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(kbsout.o):
+    CODE              Offs=000786  Size=000006  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(ldaxsp.o):
+    CODE              Offs=00078C  Size=000009  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(loadaddr.o):
+    LOADADDR          Offs=000000  Size=000002  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(memset.o):
+    CODE              Offs=000795  Size=00005D  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(mul8.o):
+    CODE              Offs=0007F2  Size=00003A  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(mulax3.o):
+    CODE              Offs=00082C  Size=000011  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(popa.o):
+    CODE              Offs=00083D  Size=00000C  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(popptr1.o):
+    CODE              Offs=000849  Size=00000E  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(pusha.o):
+    CODE              Offs=000857  Size=000016  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(pushax.o):
+    CODE              Offs=00086D  Size=00001A  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(pushwsp.o):
+    CODE              Offs=000887  Size=00001C  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(staspidx.o):
+    CODE              Offs=0008A3  Size=000016  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(status.o):
+/usr/share/cc65/lib/pet.lib(staxsp.o):
+    CODE              Offs=0008B9  Size=00000B  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(udiv.o):
+    CODE              Offs=0008C4  Size=00004F  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(umod.o):
+    CODE              Offs=000913  Size=000011  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(zerobss.o):
+    CODE              Offs=000924  Size=000023  Align=00001  Fill=0000
+/usr/share/cc65/lib/pet.lib(zeropage.o):
+    ZEROPAGE          Offs=000000  Size=00001A  Align=00001  Fill=0000
+
+
+Segment list:
+-------------
+Name                   Start     End    Size  Align
+----------------------------------------------------
+ZEROPAGE              000055  00006E  00001A  00001
+LOADADDR              0003FF  000400  000002  00001
+EXEHDR                000401  00040C  00000C  00001
+STARTUP               00040D  00044C  000040  00001
+ONCE                  00044D  000458  00000C  00001
+CODE                  000459  000D9F  000947  00001
+RODATA                000DA0  000DE5  000046  00001
+DATA                  000DE6  000E0E  000029  00001
+INIT                  000E0F  000E28  00001A  00001
+BSS                   000E29  001231  000409  00001
+
+
+Exports list by name:
+---------------------
+BSOUT                     000BDF RLA    CURS_X                    0000C6 RLZ    
+CURS_Y                    0000D8 RLZ    ST                        000096 RLZ    
+__BSS_RUN__               000E29 RLA    __BSS_SIZE__              000409 REA    
+__CONSTRUCTOR_COUNT__     000000 REA    __CONSTRUCTOR_TABLE__     000459 RLA    
+__DESTRUCTOR_COUNT__      000000 REA    __DESTRUCTOR_TABLE__      000DE6 RLA    
+__EXEHDR__                000001 REA    __LOADADDR__              000001 REA    
+__STACKSIZE__             000800 REA    __STARTUP__               000001 REA    
+_cgetc                    000A68 RLA    _clrscr                   000AC6 RLA    
+_cputc                    000B01 RLA    _gotoxy                   000B9E RLA    
+_kbhit                    000BD6 RLA    _main                     000500 RLA    
+_memset                   000BF6 RLA    addysp                    000A39 RLA    
+aslax2                    000A46 RLA    callmain                  000A51 RLA    
+checkst                   000ABC RLA    cursor                    00122F RLA    
+decsp1                    000B6B RLA    decsp2                    000B74 RLA    
+decsp3                    000B81 RLA    decsp4                    000B8E RLA    
+donelib                   000AF0 RLA    gotoxy                    000B9B RLA    
+incax1                    000BA8 RLA    incsp1                    000BAF RLA    
+incsp2                    000BBE RLA    incsp3                    000BCC RLA    
+incsp6                    000BD1 RLA    initlib                   00044D RLA    
+ldax0sp                   000BE5 RLA    mulax3                    000C85 RLA    
+plot                      000B4C RLA    popa                      000C96 RLA    
+popax                     000BB6 RLA    popptr1                   000CA2 RLA    
+ptr1                      00005D RLZ    ptr2                      00005F RLZ    
+ptr3                      000061 RLZ    ptr4                      000063 RLZ    
+pusha                     000CB4 RLA    pusha0                    000CC8 RLA    
+pushax                    000CCA RLA    pushwysp                  000CE2 RLA    
+sp                        000055 RLZ    sreg                      000057 RLZ    
+staspidx                  000CFC RLA    stax0sp                   000D12 RLA    
+tmp1                      000065 RLZ    tosadda0                  000A1C RLA    
+tosaddax                  000A1E RLA    tosumoda0                 000D6C RLA    
+tosumula0                 000C4B RLA    udiv16                    000D2E RLA    
+zerobss                   000D7D RLA    
+
+
+Exports list by value:
+----------------------
+__CONSTRUCTOR_COUNT__     000000 REA    __DESTRUCTOR_COUNT__      000000 REA    
+__EXEHDR__                000001 REA    __LOADADDR__              000001 REA    
+__STARTUP__               000001 REA    sp                        000055 RLZ    
+sreg                      000057 RLZ    ptr1                      00005D RLZ    
+ptr2                      00005F RLZ    ptr3                      000061 RLZ    
+ptr4                      000063 RLZ    tmp1                      000065 RLZ    
+ST                        000096 RLZ    CURS_X                    0000C6 RLZ    
+CURS_Y                    0000D8 RLZ    __BSS_SIZE__              000409 REA    
+initlib                   00044D RLA    __CONSTRUCTOR_TABLE__     000459 RLA    
+_main                     000500 RLA    __STACKSIZE__             000800 REA    
+tosadda0                  000A1C RLA    tosaddax                  000A1E RLA    
+addysp                    000A39 RLA    aslax2                    000A46 RLA    
+callmain                  000A51 RLA    _cgetc                    000A68 RLA    
+checkst                   000ABC RLA    _clrscr                   000AC6 RLA    
+donelib                   000AF0 RLA    _cputc                    000B01 RLA    
+plot                      000B4C RLA    decsp1                    000B6B RLA    
+decsp2                    000B74 RLA    decsp3                    000B81 RLA    
+decsp4                    000B8E RLA    gotoxy                    000B9B RLA    
+_gotoxy                   000B9E RLA    incax1                    000BA8 RLA    
+incsp1                    000BAF RLA    popax                     000BB6 RLA    
+incsp2                    000BBE RLA    incsp3                    000BCC RLA    
+incsp6                    000BD1 RLA    _kbhit                    000BD6 RLA    
+BSOUT                     000BDF RLA    ldax0sp                   000BE5 RLA    
+_memset                   000BF6 RLA    tosumula0                 000C4B RLA    
+mulax3                    000C85 RLA    popa                      000C96 RLA    
+popptr1                   000CA2 RLA    pusha                     000CB4 RLA    
+pusha0                    000CC8 RLA    pushax                    000CCA RLA    
+pushwysp                  000CE2 RLA    staspidx                  000CFC RLA    
+stax0sp                   000D12 RLA    udiv16                    000D2E RLA    
+tosumoda0                 000D6C RLA    zerobss                   000D7D RLA    
+__DESTRUCTOR_TABLE__      000DE6 RLA    __BSS_RUN__               000E29 RLA    
+cursor                    00122F RLA    
+
+
+Imports list:
+-------------
+BSOUT (kbsout.o):
+    crt0.o                    pet/crt0.s(10)
+CURS_X (conio.o):
+    gotoxy.o                  cbm/gotoxy.s(9)
+CURS_Y (conio.o):
+    gotoxy.o                  cbm/gotoxy.s(9)
+ST (status.o):
+    checkst.o                 pet/checkst.s(9)
+    crt0.o                    pet/crt0.s(11)
+__BSS_RUN__ ([linker generated]):
+    zerobss.o                 common/zerobss.s(8)
+__BSS_SIZE__ ([linker generated]):
+    zerobss.o                 common/zerobss.s(8)
+__CONSTRUCTOR_COUNT__ ([linker generated]):
+    condes.o                  runtime/condes.s(18)
+__CONSTRUCTOR_TABLE__ ([linker generated]):
+    condes.o                  runtime/condes.s(18)
+__DESTRUCTOR_COUNT__ ([linker generated]):
+    condes.o                  runtime/condes.s(19)
+__DESTRUCTOR_TABLE__ ([linker generated]):
+    condes.o                  runtime/condes.s(19)
+__EXEHDR__ (exehdr.o):
+    [linker generated]        /usr/share/cc65/cfg/pet.cfg(3)
+__LOADADDR__ (loadaddr.o):
+    [linker generated]        /usr/share/cc65/cfg/pet.cfg(2)
+__STACKSIZE__ ([linker generated]):
+    [linker generated]        /usr/share/cc65/cfg/pet.cfg(10)
+__STARTUP__ (crt0.o):
+    main.o                    src/main.s(13)
+_cgetc (cgetc.o):
+    main.o                    src/main.s(18)
+_clrscr (clrscr.o):
+    main.o                    src/main.s(14)
+_cputc (cputc.o):
+    main.o                    src/main.s(17)
+_gotoxy (gotoxy.o):
+    main.o                    src/main.s(16)
+_kbhit (kbhit.o):
+    main.o                    src/main.s(15)
+_main (main.o):
+    callmain.o                runtime/callmain.s(11)
+_memset (memset.o):
+    screen.o                  src/screen.s(13)
+addysp (addysp.o):
+    incsp6.o                  runtime/incsp6.s(8)
+    incsp3.o                  runtime/incsp3.s(8)
+    screen.o                  src/screen.s(365)
+aslax2 (aslax2.o):
+    screen.o                  src/screen.s(365)
+callmain (callmain.o):
+    crt0.o                    pet/crt0.s(9)
+checkst (checkst.o):
+    kbsout.o                  pet/kbsout.s(8)
+cursor (_cursor.o):
+    cgetc.o                   pet/cgetc.s(8)
+decsp1 (decsp1.o):
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+decsp2 (decsp2.o):
+    screen.o                  src/screen.s(365)
+    main.o                    src/main.s(186)
+decsp3 (decsp3.o):
+    screen.o                  src/screen.s(365)
+decsp4 (decsp4.o):
+    screen.o                  src/screen.s(365)
+donelib (condes.o):
+    crt0.o                    pet/crt0.s(7)
+gotoxy (gotoxy.o):
+    cputc.o                   pet/cputc.s(10)
+incax1 (incax1.o):
+    player.o                  src/player.s(511)
+    screen.o                  src/screen.s(365)
+    main.o                    src/main.s(186)
+incsp1 (incsp1.o):
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    main.o                    src/main.s(186)
+incsp2 (incsp2.o):
+    staspidx.o                runtime/staspidx.s(8)
+    popptr1.o                 runtime/popptr1.s(8)
+    player.o                  src/player.s(511)
+    main.o                    src/main.s(186)
+incsp3 (incsp3.o):
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    screen.o                  src/screen.s(365)
+incsp6 (incsp6.o):
+    screen.o                  src/screen.s(365)
+initlib (condes.o):
+    crt0.o                    pet/crt0.s(7)
+ldax0sp (ldaxsp.o):
+    main.o                    src/main.s(186)
+mulax3 (mulax3.o):
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+plot (cputc.o):
+    gotoxy.o                  cbm/gotoxy.s(8)
+    clrscr.o                  pet/clrscr.s(8)
+popa (popa.o):
+    gotoxy.o                  cbm/gotoxy.s(8)
+popax (incsp2.o):
+    memset.o                  common/memset.s(19)
+popptr1 (popptr1.o):
+    udiv.o                    runtime/udiv.s(9)
+    umod.o                    runtime/umod.s(8)
+    mul8.o                    runtime/mul8.s(9)
+ptr1 (zeropage.o):
+    udiv.o                    runtime/udiv.s(10)
+    zerobss.o                 common/zerobss.s(9)
+    staspidx.o                runtime/staspidx.s(9)
+    popptr1.o                 runtime/popptr1.s(9)
+    mulax3.o                  runtime/mulax3.s(9)
+    mul8.o                    runtime/mul8.s(10)
+    memset.o                  common/memset.s(20)
+    clrscr.o                  pet/clrscr.s(9)
+    player.o                  src/player.s(11)
+    screen.o                  src/screen.s(11)
+ptr2 (zeropage.o):
+    memset.o                  common/memset.s(20)
+ptr3 (zeropage.o):
+    memset.o                  common/memset.s(20)
+ptr4 (zeropage.o):
+    udiv.o                    runtime/udiv.s(10)
+    umod.o                    runtime/umod.s(9)
+    mul8.o                    runtime/mul8.s(10)
+pusha (pusha.o):
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    screen.o                  src/screen.s(365)
+    screen.o                  src/screen.s(365)
+    main.o                    src/main.s(186)
+    main.o                    src/main.s(186)
+pusha0 (pushax.o):
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    screen.o                  src/screen.s(365)
+    screen.o                  src/screen.s(365)
+    screen.o                  src/screen.s(365)
+pushax (pushax.o):
+    callmain.o                runtime/callmain.s(11)
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    screen.o                  src/screen.s(365)
+    screen.o                  src/screen.s(365)
+    screen.o                  src/screen.s(365)
+    screen.o                  src/screen.s(365)
+pushwysp (pushwsp.o):
+    screen.o                  src/screen.s(365)
+sp (zeropage.o):
+    staxsp.o                  runtime/staxsp.s(8)
+    staspidx.o                runtime/staspidx.s(9)
+    pushwsp.o                 runtime/pushwsp.s(8)
+    pushax.o                  runtime/pushax.s(8)
+    pusha.o                   runtime/pusha.s(8)
+    popptr1.o                 runtime/popptr1.s(9)
+    popa.o                    runtime/popa.s(8)
+    memset.o                  common/memset.s(20)
+    ldaxsp.o                  runtime/ldaxsp.s(8)
+    incsp2.o                  runtime/incsp2.s(8)
+    incsp1.o                  runtime/incsp1.s(8)
+    decsp4.o                  runtime/decsp4.s(8)
+    decsp3.o                  runtime/decsp3.s(8)
+    decsp2.o                  runtime/decsp2.s(8)
+    decsp1.o                  runtime/decsp1.s(8)
+    crt0.o                    /build/cc65-5FfAbq/cc65-2.19/asminc/zeropage.inc(11)
+    addysp.o                  runtime/addysp.s(8)
+    add.o                     runtime/add.s(12)
+    player.o                  src/player.s(10)
+    screen.o                  src/screen.s(10)
+    main.o                    src/main.s(10)
+sreg (zeropage.o):
+    udiv.o                    runtime/udiv.s(10)
+    umod.o                    runtime/umod.s(9)
+staspidx (staspidx.o):
+    screen.o                  src/screen.s(365)
+    screen.o                  src/screen.s(365)
+stax0sp (staxsp.o):
+    main.o                    src/main.s(186)
+tmp1 (zeropage.o):
+    staspidx.o                runtime/staspidx.s(9)
+    aslax2.o                  runtime/aslax2.s(8)
+    add.o                     runtime/add.s(12)
+tosadda0 (add.o):
+    player.o                  src/player.s(511)
+tosaddax (add.o):
+    screen.o                  src/screen.s(365)
+tosumoda0 (umod.o):
+    screen.o                  src/screen.s(365)
+    screen.o                  src/screen.s(365)
+tosumula0 (mul8.o):
+    player.o                  src/player.s(511)
+    player.o                  src/player.s(511)
+    screen.o                  src/screen.s(365)
+    screen.o                  src/screen.s(365)
+udiv16 (udiv.o):
+    umod.o                    runtime/umod.s(8)
+zerobss (zerobss.o):
+    crt0.o                    pet/crt0.s(8)
+
