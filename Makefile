@@ -1,20 +1,14 @@
-CC65_HOME = /usr/local/share/cc65
 CC = cl65
 CFLAGS = -t pet -O
-LDFLAGS = -t pet -m game.map
+LDFLAGS = -t pet
 
-SOURCES = src/main.c src/screen.c src/player.c
-OBJECTS = $(SOURCES:.c=.o)
+SOURCES = src/main.c
+TARGET = game.prg
 
-.PHONY: all clean
+all: $(TARGET)
 
-all: game.prg
-
-game.prg: $(OBJECTS)
-	$(CC) $(LDFLAGS) -o $@ $^
-
-%.o: %.c
-	$(CC) -c $(CFLAGS) -o $@ $<
+$(TARGET): $(SOURCES)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 clean:
-	rm -f game.prg $(OBJECTS) game.map 
+	rm -f $(TARGET) *.o 
