@@ -45,6 +45,7 @@ void handle_input(void);
 // Game state variables (matching assembly)
 static unsigned char ticks = 0;
 static unsigned char i = 0;
+static unsigned char j = 0;
 static unsigned char alive = 1;
 static unsigned char won_game = 0;
 static unsigned char x = 0;
@@ -53,6 +54,25 @@ static unsigned char old_x = 0;
 static unsigned char old_y = 0;
 static unsigned int sx = 0;
 static unsigned int sy = 0;
+
+
+struct Enemy {
+    int x, y;           // Position relative to screen
+    unsigned char active;        // Whether enemy is alive
+    unsigned char sprite;        // Character to display
+};
+
+#define MAX_ENEMIES 6
+struct Enemy enemies[MAX_ENEMIES] = {
+    {60, 5, 1, 'O'},
+    {100, 10, 1, 'O'},  
+    {150, 10, 1, 'O'},  
+    {200, 15, 1, 'O'},
+    {300, 5, 1, 'O'},
+    {310, 8, 1, 'O'},  
+    // ... more enemies ...
+};
+
 
 // Shooting
 #define MAX_BULLETS 4  // Maximum bullets on screen
@@ -254,6 +274,20 @@ void draw_screen(void) {
             screen_buffer[bullets[i].y * SCREEN_COLS + bullets[i].x] = '-';  // Or whatever bullet character
         }
     }
+    // In draw_screen(), after map drawing but before ship:
+    // Draw active enemies
+    for(i = 0; i < MAX_ENEMIES; i++) {
+        if(enemies[i].active) {
+            // Calculate screen position based on map scroll
+            int screen_x = enemies[i].x - sx;
+            // Only draw if visible on screen
+            if(screen_x >= 0 && screen_x < SCREEN_COLS) {
+                screen_buffer[enemies[i].y * SCREEN_COLS + screen_x] = enemies[i].sprite;
+            }
+        }
+    }
+
+
 }
 
 void draw_ship(void) {
@@ -342,6 +376,20 @@ void update_bullets(void) {
             if(bullets[i].x >= SCREEN_COLS) {
                 bullets[i].active = false;
             }
+
+            // Check collision with enemies
+        for(j = 0; j < MAX_ENEMIES; j++) {
+            if(enemies[j].active) {
+                int enemy_screen_x = enemies[j].x - sx;
+                if(bullets[i].x == enemy_screen_x && 
+                   bullets[i].y == enemies[j].y) {
+                    // Collision! Destroy both bullet and enemy
+                    bullets[i].active = 0;
+                    enemies[j].active = 0;
+                    break;
+                }
+            }
+        }
         }
     }
 }
