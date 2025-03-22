@@ -24,6 +24,8 @@ void wait_vsync(void);
 void draw_screen(void);
 void draw_ship(void);
 void handle_input(void);
+void update_bullets(void);
+void update_enemies(void);
 
 // Memory locations from assembly
 #define SCREEN_RAM 0x8000
@@ -60,19 +62,70 @@ struct Enemy {
     int x, y;           // Position relative to screen
     unsigned char active;        // Whether enemy is alive
     unsigned char sprite;        // Character to display
+    unsigned char move_type;     // Type of movement pattern
+    unsigned char move_counter;  // For timing movement
 };
 
-#define MAX_ENEMIES 6
+// Define movement types
+#define MOVE_NONE 0      // Stationary enemy
+#define MOVE_UPDOWN 1    // Moves up and down
+#define MOVE_ZIGZAG 2    // Moves in a zigzag pattern
+#define MOVE_CIRCLE 3    // Moves in a circular pattern
+
+#define MAX_ENEMIES 7
 struct Enemy enemies[MAX_ENEMIES] = {
-    {60, 5, 1, 90},
-    {100, 10, 1, 90},  
-    {150, 10, 1, 90},  
-    {200, 15, 1, 90},
-    {300, 5, 1, 90},
-    {310, 8, 1, 90},  
+    {41, 5, 1, 90, MOVE_UPDOWN, 0},
+    {50, 0, 1, 90, MOVE_UPDOWN, 0},
+    {100, 10, 1, 90, MOVE_UPDOWN, 0},  
+    {150, 10, 1, 90, MOVE_ZIGZAG, 0},  
+    {200, 15, 1, 90, MOVE_CIRCLE, 0},
+    {300, 5, 1, 90, MOVE_CIRCLE, 0},
+    {310, 8, 1, 90, MOVE_CIRCLE, 0},  
     // ... more enemies ...
 };
 
+// Add the full implementation before main()
+void update_enemies(void) {
+    for(i = 0; i < MAX_ENEMIES; i++) {
+        if(enemies[i].active) {
+            switch(enemies[i].move_type) {
+                case MOVE_UPDOWN:
+                    enemies[i].move_counter++;
+                    if(enemies[i].move_counter < 20) {
+                        enemies[i].y++;
+                    } else if(enemies[i].move_counter < 40) {
+                        enemies[i].y--;
+                    } else {
+                        enemies[i].move_counter = 0;
+                    }
+                    break;
+                    
+                case MOVE_ZIGZAG:
+                    enemies[i].move_counter++;
+                    if(enemies[i].move_counter & 8) {
+                        enemies[i].y++;
+                    } else {
+                        enemies[i].y--;
+                    }
+                    break;
+                    
+                case MOVE_CIRCLE:
+                    enemies[i].move_counter++;
+                    switch(enemies[i].move_counter & 7) {
+                        case 0: enemies[i].y++; break;
+                        case 1: enemies[i].x++; enemies[i].y++; break;
+                        case 2: enemies[i].x++; break;
+                        case 3: enemies[i].x++; enemies[i].y--; break;
+                        case 4: enemies[i].y--; break;
+                        case 5: enemies[i].x--; enemies[i].y--; break;
+                        case 6: enemies[i].x--; break;
+                        case 7: enemies[i].x--; enemies[i].y++; break;
+                    }
+                    break;
+            }
+        }
+    }
+}
 
 // Shooting
 #define MAX_BULLETS 4  // Maximum bullets on screen
@@ -418,6 +471,7 @@ int main(void) {
                 
                 // Draw new frame
                 update_bullets();
+                update_enemies();  // Add this line
                 draw_screen();
                 draw_ship();
                 
