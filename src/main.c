@@ -57,6 +57,7 @@ static unsigned char old_x = 0;
 static unsigned char old_y = 0;
 static unsigned int sx = 0;
 static unsigned int sy = 0;
+static char hud[10];
 
 
 struct Enemy {
@@ -484,9 +485,16 @@ int main(void) {
                 update_enemies();  // Add this line
                 draw_screen();
                 draw_ship();
+
+                sprintf(hud, "%c%c%c%c%c%c%c%1d", 140,137,150,133,147,186,32,lives);
+                // Draw HUD in top-right corner of screen buffer
+                memcpy(screen_buffer + SCREEN_COLS - 8, hud, 8);
+            
                 
                 // Update screen
                 memcpy((void*)SCREEN_RAM, screen_buffer, SCREEN_COLS * SCREEN_ROWS);
+            
+            
             }
         }
         
