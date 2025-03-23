@@ -1,79 +1,101 @@
-# PET Graphics Engine API Documentation
+# Graphics API Documentation
 
 ## Overview
-The PET Graphics Engine provides a reusable foundation for creating character-based games on the Commodore PET. It handles screen management, sprite plotting, and PETSCII character conversion.
 
-## Core Components
+The graphics system is character-based, utilizing the PET's built-in character display capabilities. The screen is memory-mapped at `0x8000` with a resolution of 40x20 characters.
+
+## Core Graphics Functions
 
 ### Screen Management
-```c
-void init_graphics(void);
-```
-Initializes the graphics system:
-- Clears the screen buffer
-- Resets scroll offset
-- Disables cursor
-- Must be called before any other graphics functions
 
-```c
-void clear_screen(void);
-```
-Clears the entire screen buffer:
-- Fills with space characters (0x20)
-- Does not affect screen RAM until update_screen() is called
+#### `void init_screen(void)`
+Initializes the screen system and sets up initial display state.
 
-```c
-void wait_vsync(void);
-```
-Synchronizes with vertical blank:
-- Prevents screen tearing
-- Call before updating screen contents
-- Currently uses delay loop, will be enhanced with true vsync
+#### `void txt_cls(void)`
+Clears the entire screen to blank characters.
 
-### Sprite Operations
-```c
-void plot_sprite(
-    unsigned char x,          // X position (0-39)
-    unsigned char y,          // Y position (0-24)
-    const unsigned char* data,// Sprite character data
-    unsigned char width,      // Sprite width in characters
-    unsigned char height      // Sprite height in characters
-);
-```
-Plots a sprite to the screen buffer:
-- Handles screen edge wrapping
-- Supports variable-sized sprites
-- Data array must contain width * height characters
-- Does not perform collision detection
+#### `void txt_move_to(void)`
+Positions the cursor for subsequent text output.
 
-### PETSCII Graphics
-```c
-void bitmap_to_petscii(
-    const unsigned char bitmap[4][4], // 4x4 bitmap input
-    unsigned char* result             // Resulting PETSCII character
-);
-```
-Converts 4x4 bitmap to PETSCII character:
-- Input: 4x4 array where non-zero = pixel set
-- Output: Best matching PETSCII block character
-- Used for converting bitmap graphics to characters
+#### `void txt_print_string(void)`
+Outputs a string at the current cursor position.
+
+#### `void txt_clear_buffer(void)`
+Clears the text buffer used for double buffering.
+
+#### `void draw_screen(void)`
+Main rendering function that updates the entire display.
+
+### Sprite Management
+
+#### `void draw_ship(void)`
+Renders the player's ship using character-based graphics.
+
+### Synchronization
+
+#### `void wait_vsync(void)`
+Waits for vertical sync to prevent screen tearing.
+
+## Memory Layout
+
+### Screen Memory
+- Base Address: `0x8000`
+- Screen Width: 40 characters
+- Screen Height: 20 characters
+- Total Size: 800 bytes
+
+### Character Properties
+- Standard PETSCII character set
+- Single color (monochrome display)
+- Character-based sprites and graphics
+
+## Display Techniques
+
+### Double Buffering
+The system uses a double buffering approach for smooth animation:
+1. Draw to off-screen buffer
+2. Wait for vsync
+3. Copy buffer to screen memory
+
+### Character-Based Graphics
+- Sprites composed of multiple characters
+- Movement in character-cell increments
+- Collision detection based on character values
 
 ### Screen Updates
-```c
-void scroll_screen(void);
-```
-Performs horizontal scrolling:
-- Updates internal scroll offset
-- Must be followed by update_screen()
-- Wraps content at screen edges
+- Direct memory writes for efficiency
+- Synchronized with vertical blank
+- Optimized for character-based operations
 
+## Performance Considerations
+
+### Optimization Techniques
+1. Direct memory access for screen updates
+2. Zero page usage for critical pointers
+3. Minimal screen updates when possible
+4. Vsync timing for smooth animation
+
+### Limitations
+- Character-cell resolution only
+- No hardware sprites
+- Single color display
+- Limited to PETSCII character set
+
+## Usage Examples
+
+### Basic Screen Output
 ```c
-void update_screen(void);
+txt_cls();              // Clear screen
+txt_move_to();         // Position cursor
+txt_print_string();    // Output text
 ```
-Copies buffer to screen RAM:
-- Applies current scroll offset
-- Call after all buffer updates complete
-- Should be called during/after vsync
+
+### Animation Loop
+```c
+wait_vsync();          // Wait for vertical blank
+draw_screen();         // Update display
+draw_ship();          // Draw player sprite
+```
 
 ## Constants
 
@@ -82,54 +104,6 @@ Copies buffer to screen RAM:
 #define SCREEN_COLS 40       // Screen width in characters
 #define SCREEN_ROWS 25       // Screen height in characters
 ```
-
-## Usage Example
-
-```c
-// Initialize graphics
-init_graphics();
-
-// Game loop
-while(1) {
-    wait_vsync();           // Wait for vertical blank
-    
-    // Update game state
-    plot_sprite(x, y, sprite_data, width, height);
-    scroll_screen();        // Scroll background
-    
-    update_screen();        // Copy to screen RAM
-}
-```
-
-## Performance Considerations
-
-1. Buffer Updates
-   - Group multiple sprite plots before update_screen()
-   - Update only changed portions when possible
-   - Avoid unnecessary screen clears
-
-2. Timing
-   - Always call wait_vsync() before screen updates
-   - Complete all drawing before update_screen()
-   - Keep sprite sizes minimal for faster plotting
-
-3. Memory
-   - Screen buffer uses 1000 bytes (40x25)
-   - Sprite data stored in ROM when possible
-   - Reuse sprite data for similar objects
-
-## Limitations
-
-1. Display
-   - 40x25 character resolution
-   - No hardware sprites
-   - No color support
-   - Character-based graphics only
-
-2. Performance
-   - Software scrolling only
-   - No hardware acceleration
-   - Limited by 1MHz CPU speed
 
 ## Future Enhancements
 

@@ -1,142 +1,105 @@
-# PET-Type Implementation Documentation (v1.0)
+# PET Game Implementation Details
 
-This document details the implementation of PET-Type v1.0, which matches the original 2021 assembly version.
+## Code Structure
 
-## Core Components
+The game is implemented in C and consists of the following main components:
 
-### 1. Screen and Memory Management
+### Main Source Files
+- `src/main.c`: Core game implementation
+- `src/game/game.h`: Game-specific declarations and constants
 
-The game uses a double-buffering system for smooth graphics:
+### Memory Layout
+- Screen RAM: `0x8000`
+- Screen dimensions: 40x20 characters
+- Timer location: `0xe840`
 
-- Screen Buffer: Located at `$8000`
-- Screen Size: 40×24 characters (visible area)
-- Map Size: 400×24 characters (scrollable area)
-- Double buffering:
-  - Working buffer: `screen_buffer`
-  - Display buffer: `$8000`
+### Zero Page Usage
+- Text temp address pointer: `0x68`
+- Destination pointer: `0x6A`
+- Map pointer: `0x6C`
+- Screen destination: `0x6E`
 
-### 2. Map System
+### Hardware Registers
+- Interrupt flag: `0xe813`
+- Key row: `0xe810`
+- Key read: `0xe812`
 
-The game world is stored in a large character map:
+## Core Game Components
 
-- Total map size: 9600 bytes (400×24)
-- Each row is 400 bytes wide
-- Scrolling implemented via offset (sx) when copying from map to screen
-- Map data contains PETSCII characters forming the game environment
-- Map wraps horizontally for infinite scrolling
+### Game State Management
+- Tick counter for timing
+- Game loop with vsync synchronization
+- Input handling system
+- Screen buffer management
 
-### 3. Sprite System
+### Game Objects
 
-Player ship sprite characteristics:
-
-- Size: 3 rows × 5 columns of PETSCII characters
-- Collision detection:
-  - Checks character values at sprite position
-  - Can be disabled with `collision_off` flag for debugging
-- Sprite drawing uses direct memory writes to screen buffer
-- Multi-character composition creates detailed sprite appearance
-
-### 4. Game Loop
-
-The main game loop follows this sequence:
-
+#### Enemies
 ```c
-1. Wait for vertical blank start (Screen_WaitVblStart)
-2. Update game state:
-   - Process keyboard input
-   - Update player position
-   - Handle scrolling
-3. Draw frame:
-   - Copy map section to screen buffer
-   - Draw ship sprite
-   - Copy screen buffer to display
-4. Wait for vertical blank end (Screen_WaitVblEnd)
+struct Enemy {
+    int x, y;           // Position relative to screen
+    unsigned char active;        // Whether enemy is alive
+    unsigned char sprite;        // Character to display
+    unsigned char move_type;     // Type of movement pattern
+    unsigned char move_counter;  // For timing movement
+};
 ```
 
-### 5. Input Handling
-
-The game supports two key mappings:
-
-Regular Keys:
-```
-Up    = $0103
-Down  = $0105
-Left  = $0104
-Right = $0204
-```
-
-Numeric Keypad:
-```
-Up    = $4003
-Down  = $4005
-Left  = $4004
-Right = $8004
-```
-
-### 6. Screen Drawing
-
-The `draw_screen()` function handles map rendering:
-
+#### Bullets
 ```c
-draw_screen():
-1. Calculate map offset based on scroll position (sx)
-2. For each screen row (0-23):
-   - Calculate row offset in map (row × 400 + sx)
-   - Copy 40 bytes from map to screen buffer
-   - Advance to next row
+struct Bullet {
+    int x, y;
+    unsigned char active;
+};
 ```
 
-### 7. Collision Detection
+### Core Functions
 
-Collision handling in `draw_ship()`:
+#### Screen Management
+- `init_screen()`: Initialize screen state
+- `txt_cls()`: Clear screen
+- `txt_move_to()`: Position cursor
+- `txt_print_string()`: Output text
+- `txt_clear_buffer()`: Clear text buffer
+- `draw_screen()`: Render game state
 
-```c
-draw_ship():
-1. Calculate ship position in screen buffer
-2. If collision detection enabled:
-   - Check characters at ship position
-   - If non-space character found, trigger collision
-3. Draw ship PETSCII characters (3×5 pattern)
-```
+#### Game Logic
+- `init_game()`: Game initialization
+- `handle_input()`: Process user input
+- `update_bullets()`: Bullet movement and collision
+- `update_enemies()`: Enemy AI and movement
+- `draw_ship()`: Player ship rendering
 
-### 8. Game States
+#### Utility Functions
+- `wait_vsync()`: Screen refresh synchronization
+- `txt_wait_key()`: Input blocking
+- `Key_Read()`: Keyboard input processing
 
-Game state is managed through global flags:
+## Technical Details
 
-- `ALIVE`: Controls game loop continuation
-- `WON_GAME`: Indicates victory condition
+### Display System
+- Character-based display
+- Direct memory mapping to screen RAM
+- Double buffering for smooth animation
+- Vsync-based timing for stable frame rate
 
-Screen states:
-- Title screen
-- Game play
-- Win/lose screen
+### Input System
+- Keyboard matrix scanning
+- Direct hardware register access
+- Debounced input processing
 
-### 9. Timing and Synchronization
+### Game Loop
+1. Input processing
+2. Game state update
+3. Collision detection
+4. Screen rendering
+5. Vsync wait
 
-The game uses several timing mechanisms:
-
-- Vertical blank synchronization for screen updates
-- Tick counter for animation timing
-- Screen updates synchronized to avoid tearing
-- Frame-based movement and scrolling
-
-### 10. Memory Layout
-
-Key memory locations:
-
-```
-$0401: BASIC stub
-$0410: Main code
-$8000: Screen memory
-screen_buffer: Working buffer for screen updates
-map: 9600 byte map data
-```
-
-## Debug Features
-
-- `collision_off` flag: Disables collision detection for testing
-- Memory-mapped screen allows direct inspection of display buffer
-- Separate screen buffer enables debugging of rendering process
+### Performance Considerations
+- Zero page usage for critical variables
+- Direct memory access for screen updates
+- Optimized character-based graphics
+- Efficient collision detection
 
 ## Known Limitations
 

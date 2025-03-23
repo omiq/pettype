@@ -1,16 +1,23 @@
-# PET Game Development Log: From Assembly to C
 
-## Revisiting a 2021 Project
+![image.png](https://files.peakd.com/file/peakd-hive/makerhacks/23vrdXsWTbezKhx5N5hv38venYXbcqJy4rUqyk6U9cZ9p5oYtZyZhmm9hhZ99c28CRn6m.png)
 
-Back in 2021, I started working on a game for the Commodore PET. The original version was written in pure 6502 assembly - a challenging but rewarding experience. Life got busy, and the project sat dormant until this weekend when I decided to dust it off and give it new life by converting it to C using the CC65 compiler.
 
-## R-Type Inspiration: Adapting an Arcade Classic
+Back in 2021, I started working on a game for the Commodore PET. The original version was written in pure 6502 assembly, via TRSE - a challenging but rewarding experience. 
 
-My project draws inspiration from Irem's iconic 1987 arcade game R-Type, though obviously with significant adaptations for the PET's limited hardware. While I can't match the arcade's beautiful 16-bit graphics or complex sprite system, I can capture some of the core elements that made R-Type special:
+Life *happened*, and the project sat dormant until this weekend when I decided to dust it off and give it new life by converting it to C using the CC65 compiler.
 
-### What I Can Adapt
+
+![output.gif](https://files.peakd.com/file/peakd-hive/makerhacks/23swXV961FpHNt2hAKWFTdq3hmPNScrJYkD2XyC39iKJyDDD7BZsoAyAkAYvkPbTNxEuZ.gif)
+
+
+## Revisiting a 2021 Project : From Assembly to C
+
+My project draws inspiration from Irem's iconic 1987 arcade game R-Type, though obviously with significant adaptations for the PET's limited hardware. 
+
+While I can't match the arcade's beautiful 16-bit graphics or complex sprite system, I can capture some of the core elements that made R-Type special:
+
 1. **Horizontal Scrolling**
-   - While R-Type had smooth pixel-perfect scrolling, I'm implementing character-by-character scrolling
+   - R-Type had smooth pixel-perfect scrolling, I'm implementing character-by-character scrolling
    - Using PETSCII characters creatively to suggest a sci-fi environment
    - The scrolling creates the same sense of progression and discovery
 
@@ -27,36 +34,31 @@ My project draws inspiration from Irem's iconic 1987 arcade game R-Type, though 
 
 ### Key Differences
 
-1. **Graphics Limitations**
-   - R-Type: Full-color sprites, detailed backgrounds, parallax scrolling
-   - My Version: Monochrome PETSCII characters, 40x20 character display
-   - Creative use of PETSCII graphics to suggest similar shapes and patterns
 
-2. **Game Mechanics**
    - No Force pod (R-Type's iconic power-up system)
    - Simpler enemy patterns due to character-grid movement
    - No charge beam system (though I could implement a basic version)
 
-3. **Technical Constraints**
+**Technical Constraints**
    - 1MHz CPU vs arcade hardware
    - Character-based collision vs pixel-perfect
    - Limited sound capabilities
    - No hardware sprites or scrolling
 
-### Capturing the Spirit
+## Capturing the Spirit
 
-While I can't recreate R-Type's technical achievements, I can capture elements of what made it engaging:
+I can't recreate R-Type's technical achievements, but I can capture elements of what made it engaging:
 - Memorizable enemy patterns
 - Skill-based gameplay
 - Strategic positioning
 - Progressive difficulty
-- The satisfaction of mastering a level
+- The satisfaction of mastering a level and the motivation to see what comes next.
 
-My goal isn't to clone R-Type, but to create an engaging shooter that pays homage to it while embracing the unique characteristics and constraints of the PET hardware.
+My goal isn't to clone R-Type (even if that was possible), but to create an engaging shooter for the PET that pays homage to it.
 
 ## The Conversion Journey: Assembly to C
 
-Converting from assembly to C using CC65 was an interesting challenge. My original assembly code had direct hardware access for screen manipulation and keyboard input, which I needed to preserve while making it more maintainable in C.
+Converting from assembly to C using CC65 was an interesting challenge. My original assembly code had direct hardware access for screen manipulation and keyboard input. I needed to preserve what was good while making it more readable and maintainable in C.
 
 ### Key Challenges I Faced
 
@@ -67,18 +69,20 @@ Converting from assembly to C using CC65 was an interesting challenge. My origin
 
 2. **Screen Handling**
    - Assembly version had direct PETSCII character manipulation
-   - Converted to a more structured approach while keeping direct memory access at 0x8000
-   - Implemented proper double buffering for smooth animation
+   - Converted to a more structured approach while keeping direct screen memory access at 0x8000
+   - Experimented with double buffering for smoother screen updates / animation
    - Maintained the 40x20 character display constraints
 
 3. **Hardware Register Access**
    - Had to map key hardware registers in C:
-     - Key row (0xe810)
-     - Key read (0xe812)
      - Interrupt flag (0xe813)
      - Timer location (0xe840)
 
 ### Solutions and Improvements
+
+So why use C if the assembly obviously worked?
+
+Using a higher level language, with the option to *drop down* to low-level assembly, gives us the quality of life and maintainability benefits.
 
 1. **Structured Data Types**
    - Introduced proper C structures for game entities:
@@ -99,7 +103,7 @@ Converting from assembly to C using CC65 was an interesting challenge. My origin
 
 ## New Features
 
-The C conversion allowed me to more easily add several features that were challenging in assembly:
+The C conversion allowed me to add several features that were challenging in assembly more easily:
 
 1. **Enhanced Enemy System**
    - Multiple enemy types with different movement patterns
@@ -112,7 +116,7 @@ The C conversion allowed me to more easily add several features that were challe
    - Active state management
 
 3. **Better Screen Management**
-   - Proper double buffering implementation
+   - The option of double buffering implementation
    - More efficient screen updates
    - Better vsync handling
 
@@ -130,14 +134,11 @@ While C code is generally less efficient than hand-crafted assembly, I've implem
    - Character-based sprite system
    - Optimized screen buffer copying
 
-3. **Input Handling**
-   - Efficient keyboard matrix scanning
-   - Debounced input processing
-   - Direct hardware register access
+
 
 ## Current State
 
-The game now has a solid foundation in C while maintaining the performance characteristics of my original assembly version. The codebase is more maintainable and easier to extend, while still respecting the hardware limitations of the PET.
+The game now has a solid foundation in C while maintaining much of the performance characteristics of my original assembly version. The codebase is more maintainable and easier to extend, while still taking into account the hardware limitations of the PET.
 
 ## Planned Improvements
 
@@ -166,6 +167,8 @@ Currently, the game uses a hard-coded array for level data. My next major update
 
 This will make it much easier for me to create and modify levels, as well as add different types of environments to the game.
 
+The trick will be implementing this without causing any added slow-downs in gameplay.
+
 ### Other Planned Features
 1. Simple sound effects using the PET's single-bit audio output (basic beeps for shooting, collisions, etc.)
 2. More enemy types and patterns
@@ -173,7 +176,7 @@ This will make it much easier for me to create and modify levels, as well as add
 4. Enhanced collision detection
 5. Level progression
 
-*Note about sound: The Commodore PET only has a single-bit output through the CB2 line, which means I'm limited to basic beeps and buzzes. While this is quite limiting compared to later Commodore machines like the C64 with its SID chip, I can still use simple sound effects to enhance the gameplay experience. These will need to be carefully timed using the CPU, as there's no dedicated sound hardware to offload to.*
+*Note about sound: The stock Commodore PET only has a single-bit output through the CB2 line, which means I'm limited to basic beeps and buzzes. While this is quite limiting compared to later Commodore machines like the C64 with its SID chip, I can still use simple sound effects to enhance the gameplay experience. These will need to be carefully timed using the CPU, as there's no dedicated sound hardware to offload to.*
 
 ## Technical Considerations
 
@@ -189,10 +192,12 @@ This will make it much easier for me to create and modify levels, as well as add
 - Careful memory access patterns
 - Balance between features and speed
 
-The tile system will need careful optimization to maintain the smooth gameplay I currently have while adding the flexibility of proper level design.
+The tile system will need careful optimization to maintain a smooth gameplay experience while adding the flexibility of proper level design.
 
-## Conclusion
+## To Sum Up
 
-Converting from assembly to C has opened up new possibilities for extending my game, while teaching me valuable lessons about both languages. The planned tile system will be a significant improvement over my current hard-coded approach, making the game more engaging and easier to expand.
+Converting from assembly to C has opened up new possibilities for extending my game while teaching me valuable lessons about both languages. 
 
-The project continues to be an excellent exercise in working within the constraints of vintage hardware while implementing modern game design patterns. 
+The planned tile system will significantly improve my current hard-coded approach, making the game more engaging and easier to expand.
+
+This project continues to be a fun exercise in working within the constraints of truly vintage hardware while attempting/implementing modern game design patterns! 

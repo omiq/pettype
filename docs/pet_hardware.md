@@ -1,159 +1,82 @@
-# Commodore PET 4032 Hardware Specifications
+# PET Hardware Implementation Details
 
-## System Overview
+## Hardware Features Used
 
-The Commodore PET 4032 is a second-generation PET computer released in 1980. The "40" indicates a 40-column screen, and "32" refers to 32KB of RAM.
-
-## CPU and Memory
-
-### Processor
-- MOS Technology 6502
-- Clock Speed: 1 MHz
-- 8-bit data bus
-- 16-bit address bus
-- Key Features:
-  - Zero page addressing (fast memory access)
-  - Limited register set (A, X, Y, SP, PC)
-  - Hardware stack limited to 256 bytes
-  - No hardware multiplication/division
+### Display System
+- 40x20 character text display
+- Memory-mapped at `0x8000`
+- Monochrome display
+- PETSCII character set for graphics
 
 ### Memory Map
+Important memory locations used in implementation:
 ```
-$0000-$00FF: Zero Page
-$0100-$01FF: System Stack
-$0200-$03FF: System Variables/Buffers
-$0400-$7FFF: BASIC Program Space/User RAM
-$8000-$83E7: Screen Memory (40x25 = 1000 bytes)
-$8400-$8FFF: Reserved
-$9000-$AFFF: I/O Area
-$B000-$DFFF: BASIC ROM
-$E000-$FFFF: KERNAL ROM
+$8000: Screen Memory (40x20 = 800 bytes)
+$e810: Key Row Register
+$e812: Key Read Register
+$e813: Interrupt Flag Register
+$e840: Timer Location
 ```
 
-## Video System
+### Zero Page Usage
+Critical zero page locations used:
+```
+$68: Text temp address pointer
+$6A: Destination pointer
+$6C: Map pointer
+$6E: Screen destination
+```
 
-### Display Specifications
-- 40x25 character text display
-- Monochrome green phosphor CRT
-- Memory-mapped at $8000
-- No hardware sprites
-- No bitmap graphics mode
-- Screen refresh rate: 60Hz (NTSC) or 50Hz (PAL)
+### Input System
+- Keyboard matrix scanning via hardware registers
+- Key row and read registers at `0xe810` and `0xe812`
+- Debounced input processing
 
-### Character Set
-- 256 built-in characters
-- Upper/lowercase switchable
-- PETSCII graphics characters:
-  - Block graphics (0xE0-0xEE)
-  - Card suit symbols
-  - Line drawing characters
-  - Business graphics symbols
+### Timing
+- Vertical sync for screen updates
+- Timer at `0xe840`
+- Interrupt handling via `0xe813`
 
-## Input/Output
+## Implementation Considerations
 
-### Keyboard
-- Full-size QWERTY layout
-- Separate numeric keypad
-- No function keys
-- Key matrix scanning via 6520 PIA
-- No hardware key repeat
-- Keyboard buffer at $026F-$0278
-
-### I/O Ports
-- IEEE-488 (GPIB) parallel port
-- 2x Commodore cassette ports
-- Memory expansion port
-- User port (parallel I/O)
-
-### Peripheral Interface Adapters
-1. 6520 PIA #1 ($E810-$E81F)
-   - Keyboard scanning
-   - IEEE-488 control
-2. 6520 PIA #2 ($E820-$E82F)
-   - IEEE-488 data
-   - Cassette control
-
-## Sound Capabilities
-
-- Single-bit output through CB2 line
-- No dedicated sound chip
-- Software-generated sound only
-- Typical frequencies: 20Hz to 10KHz
-- Programming techniques:
-  - Bit-banging
-  - Timer-based tone generation
-  - CPU cycle-counted delays
-
-## Programming Considerations
+### Display Programming
+- Character-based graphics only
+- Direct memory writes to screen RAM
+- Double buffering for smooth animation
+- Screen updates synchronized with vertical blank
 
 ### Memory Management
-- Limited RAM: Must be efficient
-- No MMU: Direct memory access
-- Stack limitations: Careful with recursion
-- Zero page: Critical for performance
+- Efficient use of zero page for pointers
+- Direct screen memory access
+- Careful management of screen buffer
 
-### Graphics Programming
-- Character-based only
-- Screen updates must be timed with refresh
-- Double buffering recommended for animation
-- PETSCII graphics provide pseudo-graphics
+### Input Processing
+- Hardware register polling
+- Matrix keyboard scanning
+- Efficient input debouncing
 
-### Timing and Interrupts
-- 60/50Hz system IRQ
-- Timer accuracy: 1MHz clock
-- No hardware sprite collision
-- CPU handles all timing
-- Cycle counting critical for precise timing
+### Performance Optimization
+1. Zero page usage for critical variables
+2. Direct memory access patterns
+3. Efficient screen update routines
+4. Synchronized display updates
 
-### Performance Tips
-1. Use zero page variables for speed
-2. Unroll time-critical loops
-3. Pre-calculate lookup tables
-4. Minimize screen updates
-5. Use self-modifying code when necessary
+## Technical Limitations
 
-## Hardware Limitations
+### Display Constraints
+- Fixed 40x20 character resolution
+- Single color (monochrome) output
+- Character-cell movement only
+- PETSCII character set limitations
 
-1. Display
-   - No hardware scrolling
-   - No sprite support
-   - No color support
-   - Limited to character mode
+### Memory Constraints
+- Fixed screen memory location
+- Limited zero page space
+- No hardware sprites
+- No bitmap graphics mode
 
-2. Memory
-   - No bank switching
-   - Fixed ROM locations
-   - Limited RAM for programs
-
-3. Sound
-   - No dedicated sound hardware
-   - Limited to simple beeps
-   - High CPU overhead for sound
-
-4. Speed
-   - 1MHz CPU limiting factor
-   - No DMA support
-   - All graphics handled by CPU
-
-## Programming Workarounds
-
-### Smooth Scrolling
-- Use character buffer technique
-- Update during vertical blank
-- Limit scroll speed to maintain performance
-
-### Sprite-like Graphics
-- Use PETSCII characters
-- Implement software sprite system
-- Use character combinations for detail
-
-### Sound Generation
-- Use timer interrupts
-- Implement software envelope
-- Balance sound vs. performance
-
-### Animation
-- Character-based animation
-- Double buffering
+### Timing Considerations
+- Vertical sync timing critical
+- Input polling overhead
 - Screen update synchronization
-- Efficient update regions 
+- Character-based animation limits 
